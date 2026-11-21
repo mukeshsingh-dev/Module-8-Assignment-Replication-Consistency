@@ -70,6 +70,10 @@ The stale-read evidence is the line `[READ IMMEDIATELY] Primary=9 Secondary=10`:
 
 The captured terminal output is also available in [`run-output.txt`](run-output.txt).
 
+### Screenshot evidence
+
+![Terminal output showing replication, stale read, and convergence](evidence/replication-consistency-terminal-output.png)
+
 ## Reflection
 
 Reading from a nearby replica can be faster and can reduce load on the Primary. The tradeoff is that asynchronous replication may temporarily return an older value, so the reader is not guaranteed to see the latest write. Reading from the Primary or waiting for a replication/convergence signal improves freshness but adds latency and can reduce availability. A system chooses between these costs based on whether speed, consistency, or availability matters most for the operation.
