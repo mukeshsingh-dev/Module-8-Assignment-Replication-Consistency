@@ -1,0 +1,19 @@
+=== Replication Consistency Demo ===
+[START] Primary stock=10
+[START] Secondary stock=10
+
+[TEST 1] Normal replication
+[REPLICATION] Secondary received stock=10
+[READ] Primary=10 Secondary=10
+[PASS] Replicas return the same value after replication completes.
+
+[TEST 2] Stale read during delayed replication
+[READ IMMEDIATELY] Primary=9 Secondary=10
+[PASS] Secondary temporarily returned stale stock=10 while Primary returned stock=9.
+
+[TEST 3] Recovery and convergence
+[REPLICATION] Secondary received stock=9
+[READ AFTER RECOVERY] Primary=9 Secondary=9
+[PASS] Replicas converged to stock=9 after replication resumed.
+
+=== ALL TESTS PASSED ===
